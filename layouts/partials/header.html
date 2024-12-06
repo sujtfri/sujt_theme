@@ -3,11 +3,11 @@
     <nav class="navbar navbar-expand-lg">
       <div class="d-flex align-items-center justify-content-center ms-2">
         <a
-          href="{{ .Site.BaseURL }}{{ .Lang }}/"
+          href="{{ .Site.Params.rootURL }}{{ .Lang }}/"
           class="d-flex align-items-center text-decoration-none me-4"
         >
           <img src="{{ "img/logos/MLLT-logo.png" | relURL }}" alt="Faculty Logo"
-          class="img-fluid" style="height: 3em; width: auto;">
+          class="img-fluid p-2" style="height: 5em; width: auto;">
           <p class="ms-2 mb-0 fs-4 fw-bold">{{.Site.Title}}</p>
         </a>
       </div>

@@ -77,3 +77,17 @@ h5 {
 .lang-active {
   text-decoration: underline;
 }
+
+.btn-accent {
+  background-color: #0099ff;
+  color: #011e41;
+  box-shadow: #0099ff 0px 2px 4px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-accent:hover {
+  background-color: #0099ff;
+  color: #011e41;
+  box-shadow: #0099ff 0px 10px 20px;
+  transform: translate3d(0px, -1px, 0px);
+}
