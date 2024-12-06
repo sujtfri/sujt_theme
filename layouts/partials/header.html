@@ -4,7 +4,7 @@
       <div class="d-flex align-items-center justify-content-center ms-2">
         <a
           href="{{ .Site.BaseURL }}{{ .Lang }}/"
-          class="d-flex align-items-center text-decoration-none"
+          class="d-flex align-items-center text-decoration-none me-4"
         >
           <img src="{{ "img/logos/MLLT-logo.png" | relURL }}" alt="Faculty Logo"
           class="img-fluid p-2" style="height: 5em; width: auto;">
@@ -24,7 +24,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav ms-4">
+        <ul class="navbar-nav">
           {{ $currentPage := . }} {{ range .Site.Menus.main.ByWeight }} {{ if
           .HasChildren }}
           <li class="nav-item dropdown">
