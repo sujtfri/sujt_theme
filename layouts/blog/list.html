@@ -5,7 +5,7 @@
 
   <div class="row">
     {{ range .Pages }}
-    <div class="col-md-4 mb-4">
+    <div class="col-md-6 mb-4">
       <div class="card">
         {{ with .Params.featuredImage }}
         <img src="{{ . | relURL }}" class="card-img-top" alt="{{ $.Title }}" />
