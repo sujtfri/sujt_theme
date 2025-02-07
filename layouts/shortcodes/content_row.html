@@ -1,0 +1,26 @@
+{{ $section := .Get 0 }}
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+  {{ range where .Site.RegularPages "Section" $section }}
+  <div class="col">
+    {{ $url := .RelPermalink }} {{ with .Params.external_url }} {{ $url = . }}
+    {{ end }}
+    <a href="{{ $url }}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm">
+        {{$title := .Title}} {{ with .Params.cover_image }}
+        <img
+          src="{{ . | relURL }}"
+          class="card-img-top"
+          alt="{{$title}}"
+          style="height: 200px; object-fit: cover"
+        />
+        {{ end }}
+        <div class="card-body">
+          <h5 class="card-title text-dark">{{ .Title }}</h5>
+          <p class="card-text text-muted">{{ .Summary }}</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  {{ end }}
+</div>
