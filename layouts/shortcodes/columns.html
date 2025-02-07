@@ -12,7 +12,7 @@
                     width:48%;
                     float:right;}
 
-      @media only screen and (max-width: 600px) {
+      @media only screen and (max-width: 991px) {
       div.splitbox div.column-left {
                     width:100%;
                     float:left;}
@@ -25,4 +25,7 @@
 
 {{- $.Page.Scratch.Add "column_count" 1 -}}
 
-<div class="splitbox"><div class="column-left">
+
+{{ $alignment := .Get "alignment" }}
+
+<div class="splitbox"><div class="column-left {{ if $alignment }}{{ $alignment | printf "text-%s" }}{{ end }}">
