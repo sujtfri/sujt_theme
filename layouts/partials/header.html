@@ -25,11 +25,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
-          {{ $currentPage := . }} {{ range .Site.Menus.main.ByWeight }} {{ if
-          .HasChildren }}
+          {{ $currentPage := . }} {{ range .Site.Menus.main.ByWeight }}
           <li class="nav-item dropdown">
             <a
-              class='nav-link dropdown-toggle {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}'
+              class='nav-link {{ if .HasChildren }} dropdown-toggle {{end}}{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}'
               href="#"
               id="navbarDropdownMenuLink"
               role="button"
@@ -38,7 +37,7 @@
             >
               {{ .Name }}
             </a>
-
+            {{ if .HasChildren }}
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               {{ range .Children }}
               <li>
@@ -52,15 +51,7 @@
               {{ end }}
             </ul>
           </li>
-          {{ else }}
-          <li class="nav-item">
-            <a
-              class='nav-link {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}'
-              href="{{ absURL .URL }}"
-            >
-              {{ .Name }}
-            </a>
-          </li>
+
           {{ end }} {{ end }}
         </ul>
 
