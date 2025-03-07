@@ -26,14 +26,19 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
           {{ $currentPage := . }} {{ range .Site.Menus.main.ByWeight }}
-          <li class="nav-item dropdown">
+          <li class="nav-item  {{ if .HasChildren }} dropdown {{end}}">
             <a
               class='nav-link {{ if .HasChildren }} dropdown-toggle {{end}}{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}'
-              href="#"
+              href="{{ if .HasChildren }}#{{ else }}{{ .URL }}{{ end }}"
               id="navbarDropdownMenuLink"
+              {{
+              if
+              .HasChildren
+              }}
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              {{end}}
             >
               {{ .Name }}
             </a>
