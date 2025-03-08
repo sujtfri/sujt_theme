@@ -25,55 +25,40 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
-          {{ $currentPage := . }} {{ range .Site.Menus.main.ByWeight }}
-          <li class="nav-item  {{ if .HasChildren }} dropdown {{end}}">
-            <a
-              class='nav-link {{ if .HasChildren }} dropdown-toggle {{end}}{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}'
-              href="{{ if .HasChildren }}#{{ else }}{{ .URL }}{{ end }}"
-              id="navbarDropdownMenuLink"
-              {{
-              if
-              .HasChildren
-              }}
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              {{end}}
-            >
-              {{ .Name }}
-            </a>
-            {{ if .HasChildren }}
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              {{ range .Children }}
-              <li>
-                <a
-                  class='dropdown-item {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}'
-                  href="{{ .URL }}"
-                >
-                  {{ .Name }}
+            {{ $currentPage := . }} 
+            {{ range .Site.Menus.main.ByWeight }}
+            <li class="nav-item {{ if .HasChildren }} dropdown {{ end }} d-flex align-items-center justify-content-center">
+                <a class="nav-link {{ if .HasChildren }} dropdown-toggle {{ end }}{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}"
+                   href="{{ if .HasChildren }}#{{ else }}{{ .URL }}{{ end }}"
+                   id="navbarDropdownMenuLink" {{ if .HasChildren }} role="button" data-bs-toggle="dropdown" aria-expanded="false" {{ end }}>
+                    {{ .Name }}
                 </a>
-              </li>
-              {{ end }}
-            </ul>
-          </li>
-
-          {{ end }} {{ end }}
+                {{ if .HasChildren }}
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    {{ range .Children }}
+                    <li>
+                        <a class='dropdown-item {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}' href="{{ .URL }}">
+                            {{ .Name }}
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+            </li>
+            {{ end }}
         </ul>
-
+    
         <ul class="navbar-nav ms-auto">
-          {{ range $.Site.Home.AllTranslations }}
-          <li class="nav-item">
-            <a
-              class="nav-link {{ if eq .Language.Lang $.Site.Language.Lang }}lang-active{{ end }}"
-              href="{{ .RelPermalink }}"
-            >
-              <span class="flag-icon {{ .Language.Params.flag }}"></span> {{
-              .Language.LanguageName }}
-            </a>
-          </li>
-          {{ end }}
+            {{ range $.Site.Home.AllTranslations }}
+            <li class="nav-item">
+                <a class="nav-link {{ if eq .Language.Lang $.Site.Language.Lang }}lang-active{{ end }}" href="{{ .RelPermalink }}">
+                    <span class="flag-icon {{ .Language.Params.flag }}"></span> {{ .Language.LanguageName }}
+                </a>
+            </li>
+            {{ end }}
         </ul>
-      </div>
+    </div>
+    
       <div class="px-5 d-none d-lg-block">
         <img src="{{ "img/logos/fri_logo_trans.png" | relURL }}" alt="Faculty
         Logo" class="img-fluid p-2" style="max-height: 100px;">
