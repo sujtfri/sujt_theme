@@ -1,18 +1,20 @@
-{{ $section := .Get 0 }}
+{{ $section := .Get 0 }} {{ $limit := .Get 1 | default 0 }} {{ $pages := where
+.Site.RegularPages "Section" $section }} {{ $pages = sort $pages ".Date" "desc"
+}} {{ if gt $limit 0 }} {{ $pages = first $limit $pages }} {{ end }}
 
-<div class="row row-cols-1 row-cols-lg-2 g-5 px-0">
-  {{ range where .Site.RegularPages "Section" $section }}
+<div class="row row-cols-1 row-cols-lg-3 g-5 mx-0 px-0">
+  {{ range $pages }}
   <div class="col">
     {{ $url := .RelPermalink }} {{ with .Params.external_url }} {{ $url = . }}
     {{ end }}
     <a href="{{ $url }}" class="text-decoration-none">
       <div class="">
-        {{$title := .Title}} {{ with .Params.cover_image }}
+        {{ $title := .Title }} {{ with .Params.cover_image }}
         <img
           src="{{ . | relURL }}"
           class="rounded card-img mb-3 img-fluid"
-          alt="{{$title}}"
-          style="height: 274px; object-fit: cover"
+          alt="{{ $title }}"
+          style="height: 232px; object-fit: cover; overflow: hidden"
         />
         {{ end }}
         <div class="card-body">
@@ -20,14 +22,14 @@
           <div class="d-flex justify-content-between">
             {{ if .Params.category }}
             <p class="body-xs regular active mb-0">{{ .Params.category }}</p>
-            {{else}}
+            {{ else }}
             <div></div>
             {{ end }} {{ if .Date }}
             <p class="body-xs regular">{{ .Date.Format "2 Jan, 2006" }}</p>
-            {{end}}
+            {{ end }}
           </div>
-          {{end}}
-          <h6 class="card-title bold mb-3">{{ .Title }}</h6>
+          {{ end }}
+          <p class="card-title body-big bold mb-3">{{ .Title }}</p>
           <p class="card-text body-small regular">{{ .Summary }}</p>
         </div>
       </div>

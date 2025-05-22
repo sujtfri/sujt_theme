@@ -1,0 +1,80 @@
+<footer class="footer">
+  <div class="container">
+    <hr class="d-block d-md-none my-3" />
+
+    <div class="d-flex flex-column flex-md-row justify-content-between gap-5">
+      <!-- Left Column: Logo and Institution -->
+      <div
+        class="mb-3 d-flex flex-column align-items-center align-items-md-start"
+      >
+        <a
+          href="{{ .Site.Params.rootURL }}{{ .Lang }}/"
+          class="d-flex align-items-center text-decoration-none me-4 mb-3"
+        >
+          <img src="{{ "img/logos/MLLT-logo.png" | relURL }}" alt="Faculty Logo"
+          style="height: 55px; width: 54px;">
+          <p class="ms-2 mb-0 body-big bold">{{.Site.Title}}</p>
+        </a>
+        <img src="{{ "img/logos/fri_logo_trans.png" | relURL }}" alt="Faculty
+        Logo" style="width: 129px; height: 54px;" class="mb-2">
+        <div class="body-small bold">Univerza v Ljubljani</div>
+        <span class="body-small regular"> Fakulteta za računalništvo </span>
+        <span class="body-small regular"> in informatiko </span>
+      </div>
+
+      <!-- Middle Column: Navigation -->
+      <div class="mb-3 d-flex justify-content-center">
+        <ul class="list-unstyled">
+          {{ $currentPage := . }} {{ range .Site.Menus.main.ByWeight }}
+          <li class="d-flex align-items-center mb-3">
+            <a
+              class="text-decoration-none body-small regular {{ if eq (urls.Parse .URL).Path $currentPage.RelPermalink }}active{{ end }}"
+              href="{{ .URL }}"
+            >
+              {{ .Name }}
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <!-- Right Column: Contact -->
+      <div
+        class="mb-3 d-flex flex-column align-items-center align-items-md-start"
+      >
+        <div class="d-flex align-items-center mb-3">
+          <img src="{{ "img/icons/location-dot.svg" | relURL }}" alt="Location
+          icon" class="me-2">
+          <span>Večna pot 113, 1000 Ljubljana</span>
+        </div>
+        <div class="d-flex align-items-center">
+          <img src="{{ "img/icons/phone.svg" | relURL }}" alt="Phone icon"
+          class="me-2">
+          <span>01 / 479 8000</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-3" />
+
+    <!-- Bottom Row -->
+    <div
+      class="d-flex flex-column my-4 flex-md-row justify-content-between align-items-center small"
+    >
+      <div class="body-xs regular mb-4 mb-md-0">
+        ©2025 · All rights reserved.
+      </div>
+      <div class="">
+        <a href="#" class="text-decoration-none me-3 body-xs regular"
+          >Security</a
+        >
+        <a href="#" class="text-decoration-none me-3 body-xs regular"
+          >Privacy policy</a
+        >
+        <a href="/terms-of-use/" class="text-decoration-none body-xs regular"
+          >Terms of use</a
+        >
+      </div>
+    </div>
+  </div>
+</footer>

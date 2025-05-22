@@ -1,0 +1,41 @@
+{{ define "main" }}
+
+<style>
+  p {
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 25px !important;
+    color: var(--ul-gray) !important;
+  }
+  img {
+    border-radius: 15px !important;
+  }
+</style>
+
+<div>
+  <div class="d-flex justify-content-between">
+    {{ if or .Params.category .Date }}
+    <div>
+      {{ if .Params.category }}
+      <p class="body-xs regular active">{{ .Params.category | upper }}</p>
+      {{ end }} {{ if .Date }}
+      <p class="body-xs regular">{{ .Date.Format "2 Jan, 2006" }}</p>
+      {{end}}
+    </div>
+    {{else}}
+    <div></div>
+    {{end}} {{if or .Params.author .Params.authors}}
+    <div>
+      <p class="body-xs regular">
+        {{ if .Params.author }} {{ .Params.author }} {{ else if .Params.authors
+        }} {{ range $index, $author := .Params.authors }} {{ if gt $index 0 }},
+        {{ end }}{{ $author }} {{ end }} {{ end }}
+      </p>
+    </div>
+    {{end}}
+  </div>
+
+  <div>{{.Content}}</div>
+</div>
+
+{{end}}

@@ -2,7 +2,7 @@
 <div class="container my-5">
   {{ $lang := .Lang }}
 
-  <h2>Select a Demo</h2>
+  <div>{{ .Content }}</div>
 
   <ul class="nav nav-tabs" id="demoTabs" role="tablist">
     {{ range $index, $demo := site.Data.demos.demos }}

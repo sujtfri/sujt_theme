@@ -3,135 +3,161 @@
   {{ $lang := .Lang }}
 
   <div class="row justify-content-center">
-    <div class="col-lg-10">
-      {{/* Head Member */}}
-      <h2 class="mb-3">
-        {{ if eq $lang "en" }} Head {{ else }} Vodja {{ end }}
-      </h2>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        {{ range .Site.Data.members.head_members }}
-        <div class="col">
-          <a
-            href="{{ .relurl | relURL }}"
-            class="d-flex align-items-start text-decoration-none"
-          >
-            <img src="{{ if and (isset . "image") (ne .image "") }}{{ .image |
-            relURL }}{{ else }}/img/placeholder.jpg{{ end }}" alt="{{ .name }}"
-            class="rounded-circle" style="width: 150px; height: 150px;
-            object-fit: cover; margin-right: 10px;" />
-            <div class="flex-grow-1">
-              <h5 class="mb-1 text-dark">{{ .name }}</h5>
-              {{ if .title }}
-              <p class="text-muted small mb-1">
-                {{ if eq $lang "en" }}{{ .title.en }}{{ else }}{{ .title.si }}{{
-                end }}
-              </p>
-              {{ end }} {{/* Contact Info (Email and Phone) */}} {{ if .contact
-              }}
-              <p class="text-muted small mb-1">
-                {{ partial "cloakemail" (dict "address" .contact) }}
-              </p>
-              {{ end }} {{ if .phone }}
-              <p class="text-muted small mb-0">
-                {{ partial "cloakemail" (dict "address" .phone) }}
-              </p>
-              {{ end }} {{/* Short Bio */}} {{ if .bio }}
-              <p class="text-muted small mt-2">
-                {{ if eq $lang "en" }}{{ .bio.en }}{{ else }}{{ .bio.si }}{{ end
-                }}
-              </p>
-              {{ end }}
-            </div>
-          </a>
-        </div>
-        {{ end }}
+    {{/* Head Member */}}
+    <h4 class="my-5 bold text-center text-md-start">
+      {{ if eq $lang "en" }} Head {{ else }} Vodja {{ end }}
+    </h4>
+    <div class="d-grid gap-4 members-grid">
+      {{ range .Site.Data.members.head_members }}
+      <div class="d-flex justify-content-center text-center">
+        <a
+          href="{{ .relurl | relURL }}"
+          class="text-decoration-none member-card"
+        >
+          <div class="mb-2 p-4">
+            {{ if and (isset . "image") (ne .image "") }}
+            <img
+              src="{{ .image |
+                relURL }}"
+              alt="{{ .name
+                }}"
+              class="rounded-members"
+              style="
+                width: 306px;
+                height: 306px;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+              "
+            />
+            {{else}}
+            <div
+              class="rounded-members"
+              style="
+                width: 306px;
+                background-color: #c1c5bf;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+              "
+            ></div>
+            {{end}}
+          </div>
+          <div class="mt-4 p-4">
+            <p class="body-big bold mb-0">{{ .name }}</p>
+            {{ if .title }}
+            <p class="body-big regular mt-2 mb-0">
+              {{ if eq $lang "en" }}{{ .title.en }}{{ else }}{{ .title.si }}{{
+              end }}
+            </p>
+            {{ end }}
+          </div>
+        </a>
       </div>
+      {{ end }}
+    </div>
 
-      {{/* Members */}}
-      <h2 class="mt-5 mb-3">
-        {{ if eq $lang "en" }} Members {{ else }} Člani {{ end }}
-      </h2>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        {{ range .Site.Data.members.staff_members }}
-        <div class="col">
-          <a
-            href="{{ .relurl | relURL }}"
-            class="d-flex align-items-start text-decoration-none"
-          >
-            <img src="{{ if and (isset . "image") (ne .image "") }}{{ .image |
-            relURL }}{{ else }}/img/placeholder.jpg{{ end }}" alt="{{ .name }}"
-            class="rounded-circle" style="width: 150px; height: 150px;
-            object-fit: cover; margin-right: 10px;" />
-            <div class="flex-grow-1">
-              <h5 class="mb-1 text-dark">{{ .name }}</h5>
-              {{ if .title }}
-              <p class="text-muted small mb-1">
-                {{ if eq $lang "en" }}{{ .title.en }}{{ else }}{{ .title.si }}{{
-                end }}
-              </p>
-              {{ end }} {{/* Contact Info (Email and Phone) */}} {{ if .contact
-              }}
-              <p class="text-muted small mb-1">
-                {{ partial "cloakemail" (dict "address" .contact) }}
-              </p>
-              {{ end }} {{ if .phone }}
-              <p class="text-muted small mb-0">
-                {{ partial "cloakemail" (dict "address" .phone) }}
-              </p>
-              {{ end }} {{/* Short Bio */}} {{ if .bio }}
-              <p class="text-muted small mt-2">
-                {{ if eq $lang "en" }}{{ .bio.en }}{{ else }}{{ .bio.si }}{{ end
-                }}
-              </p>
-              {{ end }}
-            </div>
-          </a>
-        </div>
-        {{ end }}
+    {{/* Members */}}
+    <h4 class="my-5 bold text-center text-md-start">
+      {{ if eq $lang "en" }} Staff & Researchers {{ else }} Osebje in
+      raziskovalci {{ end }}
+    </h4>
+    <div class="d-grid gap-4 members-grid">
+      {{ range .Site.Data.members.staff_members }}
+      <div class="d-flex justify-content-center text-center">
+        <a
+          href="{{ .relurl | relURL }}"
+          class="text-decoration-none member-card"
+        >
+          <div class="mb-2 p-4">
+            {{ if and (isset . "image") (ne .image "") }}
+            <img
+              src="{{ .image |
+                relURL }}"
+              alt="{{ .name
+                }}"
+              class="rounded-members"
+              style="
+                width: 306px;
+                height: 306ox;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+              "
+            />
+            {{else}}
+            <div
+              class="rounded-members"
+              style="
+                width: 306px;
+                background-color: #c1c5bf;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+              "
+            ></div>
+            {{end}}
+          </div>
+          <div class="mt-4 p-4">
+            <p class="body-big bold mb-0">{{ .name }}</p>
+            {{ if .title }}
+            <p class="body-big regular mt-2 mb-0">
+              {{ if eq $lang "en" }}{{ .title.en }}{{ else }}{{ .title.si }}{{
+              end }}
+            </p>
+            {{ end }}
+          </div>
+        </a>
       </div>
+      {{ end }}
+    </div>
 
-      {{/* Former Members */}}
-      <h2 class="mt-5 mb-3">
-        {{ if eq $lang "en" }} Former Members {{ else }} Bivši člani {{ end }}
-      </h2>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        {{ range .Site.Data.members.former_members }}
-        <div class="col">
-          <a
-            href="{{ .relurl | relURL }}"
-            class="d-flex align-items-start text-decoration-none"
-          >
-            <img src="{{ if and (isset . "image") (ne .image "") }}{{ .image |
-            relURL }}{{ else }}/img/placeholder.jpg{{ end }}" alt="{{ .name }}"
-            class="rounded-circle" style="width: 150px; height: 150px;
-            object-fit: cover; margin-right: 10px;" />
-            <div class="flex-grow-1">
-              <h5 class="mb-1 text-dark">{{ .name }}</h5>
-              {{ if .title }}
-              <p class="text-muted small mb-1">
-                {{ if eq $lang "en" }}{{ .title.en }}{{ else }}{{ .title.si }}{{
-                end }}
-              </p>
-              {{ end }} {{/* Contact Info (Email and Phone) */}} {{ if .contact
-              }}
-              <p class="text-muted small mb-1">
-                {{ partial "cloakemail" (dict "address" .contact) }}
-              </p>
-              {{ end }} {{ if .phone }}
-              <p class="text-muted small mb-0">
-                {{ partial "cloakemail" (dict "address" .phone) }}
-              </p>
-              {{ end }} {{/* Short Bio */}} {{ if .bio }}
-              <p class="text-muted small mt-2">
-                {{ if eq $lang "en" }}{{ .bio.en }}{{ else }}{{ .bio.si }}{{ end
-                }}
-              </p>
-              {{ end }}
-            </div>
-          </a>
-        </div>
-        {{ end }}
+    {{/* Former Members */}}
+    <h4 class="my-5 bold text-center text-md-start">
+      {{ if eq $lang "en" }} Former Members {{ else }} Bivši člani {{ end }}
+    </h4>
+    <div class="d-grid gap-4 members-grid">
+      {{ range .Site.Data.members.former_members }}
+      <div class="d-flex justify-content-center text-center">
+        <a
+          href="{{ .relurl | relURL }}"
+          class="text-decoration-none member-card"
+        >
+          <div class="mb-2 p-4">
+            {{ if and (isset . "image") (ne .image "") }}
+            <img
+              src="{{ .image |
+                relURL }}"
+              alt="{{ .name
+                }}"
+              class="rounded-members"
+              style="
+                width: 306px;
+                height: 306px;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+              "
+            />
+            {{else}}
+            <div
+              class="rounded-members"
+              style="
+                width: 306px;
+                background-color: #c1c5bf;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+              "
+            ></div>
+            {{end}}
+          </div>
+          <div class="mt-4 p-4">
+            <p class="body-big bold mb-0">{{ .name }}</p>
+            {{ if .title }}
+            <p class="body-big regular mt-2 mb-0">
+              {{ if eq $lang "en" }}{{ .title.en }}{{ else }}{{ .title.si }}{{
+              end }}
+            </p>
+            {{ end }}
+          </div>
+        </a>
       </div>
+      {{ end }}
     </div>
   </div>
 </div>

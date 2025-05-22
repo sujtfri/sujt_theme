@@ -1,68 +1,122 @@
-<div id="masthead" class="container-fluid border-bottom">
-  <div class="">
-    <nav class="navbar navbar-expand-lg">
-      <div class="d-flex align-items-center justify-content-center ms-2">
+{{ $lang := .Lang }}
+<div class="">
+  <div class="mx-5">
+    <nav class="navbar navbar-expand-lg border-bottom">
+      <!-- Left: Logo & Title -->
+      <div class="d-flex align-items-center justify-content-center">
         <a
           href="{{ .Site.Params.rootURL }}{{ .Lang }}/"
           class="d-flex align-items-center text-decoration-none me-4"
         >
           <img src="{{ "img/logos/MLLT-logo.png" | relURL }}" alt="Faculty Logo"
-          class="img-fluid p-2" style="height: 5em; width: auto;">
-          <p class="ms-2 mb-0 fs-4 fw-bold">{{.Site.Title}}</p>
+          class="img-fluid p-2" style="height: 55px; width: 54px;">
+          <p class="ms-2 mb-0 body-big bold">{{ .Site.Title }}</p>
         </a>
       </div>
 
+      <!-- Mobile Toggle Button -->
       <button
-        class="navbar-toggler mx-2 my-2"
+        class="navbar-toggler d-lg-none"
+        style="border: none"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#mobileMenu"
+        aria-controls="mobileMenu"
       >
-        <span class="navbar-toggler-icon"></span>
+        <img src="/img/icons/Menu.svg" alt="" />
+        <span class="body-small regular"
+          >{{ if eq $lang "en" }} Meni {{ else }} Meni {{ end }}</span
+        >
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <!-- Desktop Menu -->
+      <div
+        class="collapse navbar-collapse d-none d-lg-flex"
+        id="navbarNavAltMarkup"
+      >
         <ul class="navbar-nav">
-            {{ $currentPage := . }} 
-            {{ range .Site.Menus.main.ByWeight }}
-            <li class="nav-item {{ if .HasChildren }} dropdown {{ end }} d-flex align-items-center justify-content-center">
-                <a class="nav-link {{ if .HasChildren }} dropdown-toggle {{ end }}{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}"
-                   href="{{ if .HasChildren }}#{{ else }}{{ .URL }}{{ end }}"
-                   id="navbarDropdownMenuLink" {{ if .HasChildren }} role="button" data-bs-toggle="dropdown" aria-expanded="false" {{ end }}>
-                    {{ .Name }}
-                </a>
-                {{ if .HasChildren }}
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    {{ range .Children }}
-                    <li>
-                        <a class='dropdown-item {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active {{ end }}' href="{{ .URL }}">
-                            {{ .Name }}
-                        </a>
-                    </li>
-                    {{ end }}
-                </ul>
-                {{ end }}
-            </li>
-            {{ end }}
+          {{ $currentPage := . }} {{ range .Site.Menus.main.ByWeight }}
+          <li class="nav-item d-flex align-items-center justify-content-center">
+            <a
+              class="nav-link body-small regular {{ if eq (urls.Parse .URL).Path $currentPage.RelPermalink }}active{{ end }}"
+              href="{{ .URL }}"
+            >
+              {{ .Name }}
+            </a>
+          </li>
+          {{ end }}
         </ul>
-    
+
         <ul class="navbar-nav ms-auto">
-            {{ range $.Site.Home.AllTranslations }}
-            <li class="nav-item">
-                <a class="nav-link {{ if eq .Language.Lang $.Site.Language.Lang }}lang-active{{ end }}" href="{{ .RelPermalink }}">
-                    <span class="flag-icon {{ .Language.Params.flag }}"></span> {{ .Language.LanguageName }}
-                </a>
-            </li>
-            {{ end }}
+          {{ range $.Site.Home.AllTranslations }}
+          <li class="nav-item">
+            <a
+              class="nav-link body-small {{ if eq .Language.Lang $.Site.Language.Lang }} active-lang bold {{else}} regular {{ end }}"
+              href="{{ .RelPermalink }}"
+            >
+              {{ .Language.LanguageName }}
+            </a>
+          </li>
+          {{ end }}
         </ul>
-    </div>
-    
-      <div class="px-5 d-none d-lg-block">
+      </div>
+
+      <!-- Right: Faculty Logo -->
+      <div class="d-none d-lg-block py-4 ms-2">
         <img src="{{ "img/logos/fri_logo_trans.png" | relURL }}" alt="Faculty
-        Logo" class="img-fluid p-2" style="max-height: 100px;">
+        Logo" class="img-fluid" style="height: 54px; width: 129px;">
       </div>
     </nav>
+  </div>
+</div>
+
+<!-- Mobile Menu Offcanvas -->
+<div class="offcanvas offcanvas-start w-100" tabindex="-1" id="mobileMenu">
+  <div class="offcanvas-header justify-content-between px-4 pt-4">
+    <!-- Logo & Title -->
+    <div class="d-flex align-items-center">
+      <img src="{{ "img/logos/MLLT-logo.png" | relURL }}" alt="Logo"
+      style="height: 54px; width: 55px;">
+      <span class="ms-2 fw-bold fs-5 body-big bold">{{ .Site.Title }}</span>
+    </div>
+    <!-- Close Button -->
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <!-- Menu Links -->
+  <div
+    class="offcanvas-body d-flex flex-column justify-content-start align-items-center gap-4"
+  >
+    {{ $currentPage := . }} {{ range .Site.Menus.main.ByWeight }}
+    <a
+      class="nav-link my-2 body-big regular {{ if eq (urls.Parse .URL).Path $currentPage.RelPermalink }}active{{ end }}"
+      href="{{ .URL }}"
+      >{{ .Name }}</a
+    >
+    {{ end }}
+  </div>
+  <hr />
+  <!-- Language Selector + Logo -->
+  <div class="text-center mt-auto py-4">
+    <div class="mb-2">
+      {{ range $.Site.Home.AllTranslations }}
+      <span
+        class="{{ if eq .Language.Lang $.Site.Language.Lang }}active{{ end }} mx-1"
+      >
+        <a
+          href="{{ .RelPermalink }}"
+          class="text-decoration-none {{ if eq .Language.Lang $.Site.Language.Lang }}text-danger fw-bold{{ else }}text-muted{{ end }}"
+          >{{ .Language.Lang | upper }}</a
+        >
+      </span>
+      {{ end }}
+    </div>
+    <img src="{{ "img/logos/fri_logo_trans.png" | relURL }}" alt="FRI Logo"
+    style="height: 50px;">
   </div>
 </div>

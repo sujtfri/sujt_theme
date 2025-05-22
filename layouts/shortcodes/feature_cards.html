@@ -1,0 +1,21 @@
+<div class="row">
+  {{ with .Get "card1" }}
+  <div class="mt-3">
+    <div class="p-4 benefits-card">
+      <div class="body-medium regular">{{ . | markdownify }}</div>
+    </div>
+  </div>
+  {{ end }} {{ with .Get "card2" }}
+  <div class="mt-3">
+    <div class="p-4 benefits-card">
+      <div class="body-medium regular">{{ . | markdownify }}</div>
+    </div>
+  </div>
+  {{ end }} {{ with .Get "card3" }}
+  <div class="mt-3">
+    <div class="p-4 benefits-card">
+      <div class="body-medium regular">{{ . | markdownify }}</div>
+    </div>
+  </div>
+  {{ end }}
+</div>

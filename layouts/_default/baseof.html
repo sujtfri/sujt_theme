@@ -3,7 +3,7 @@
   {{- partial "head.html" . -}}
   <body>
     {{- partial "header.html" . -}}
-    <div id="content">{{- block "main" . }}{{- end }}</div>
+    <div id="content" class="container my-5">{{- block "main" . }}{{- end }}</div>
     {{- partial "footer.html" . -}}
     <script src="{{ "js/bootstrap.bundle.min.js" |
     relURL}}"></script>
