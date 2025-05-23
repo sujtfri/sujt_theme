@@ -4,11 +4,8 @@
     <div
       class="card p-4 flex-fill d-flex flex-column justify-content-end benefits-card"
     >
-      <img
-        src="/img/icons/Ticket, Group, Circle.svg"
-        alt="icon"
-        style="width: 42px; height: 42px"
-      />
+      <img src="{{ "img/icons/Ticket, Group, Circle.svg" | relURL}}" alt="icon"
+      style="width: 42px; height: 42px" />
       <div class="body-medium regular mt-4">{{ . | markdownify }}</div>
     </div>
   </div>
@@ -17,11 +14,8 @@
     <div
       class="card p-4 flex-fill d-flex flex-column justify-content-end benefits-card"
     >
-      <img
-        src="/img/icons/server databases data code.svg"
-        alt="icon"
-        style="width: 42px; height: 42px"
-      />
+      <img src="{{ "img/icons/server databases data code.svg" | relURL}}"
+      alt="icon" style="width: 42px; height: 42px" />
       <div class="body-medium regular mt-4">{{ . | markdownify }}</div>
     </div>
   </div>
@@ -30,11 +24,8 @@
     <div
       class="card p-4 flex-fill d-flex flex-column justify-content-end benefits-card"
     >
-      <img
-        src="/img/icons/Target, Space, Object, Select.svg"
-        alt="icon"
-        style="width: 42px; height: 42px"
-      />
+      <img src="{{ "img/icons/Target, Space, Object, Select.svg" | relURL}}"
+      alt="icon" style="width: 42px; height: 42px" />
       <div class="body-medium regular mt-4">{{ . | markdownify }}</div>
     </div>
   </div>
