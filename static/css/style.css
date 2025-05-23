@@ -242,6 +242,10 @@ a.secondary-btn:hover {
   border: 1px solid var(--red) !important;
 }
 
+.navbar-toggler:focus {
+  box-shadow: none !important;
+}
+
 pre,
 .pre {
   overflow-x: auto;
